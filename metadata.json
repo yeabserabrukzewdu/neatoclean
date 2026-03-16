@@ -1,0 +1,7 @@
+{
+  "name": "NeatoCleaning UAE - Airbnb Cleaning Services",
+  "description": "A professional cleaning service website tailored for Airbnb hosts in the UAE, offering multiple language options and detailed service packages.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
