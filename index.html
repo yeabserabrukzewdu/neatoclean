@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
       :root {
-        --brand-teal: #14b8a6;
+        --brand-primary: #0057FF;
       }
       
       body {
@@ -36,7 +36,7 @@
         border-radius: 4px;
       }
       ::-webkit-scrollbar-thumb:hover {
-        background: var(--brand-teal);
+        background: var(--brand-primary);
       }
 
       /* Sophisticated Floating Bubbles */
@@ -118,7 +118,7 @@
         content: '';
         position: absolute;
         inset: 0;
-        background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(20, 184, 166, 0.15) 0%, transparent 70%);
+        background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(0, 87, 255, 0.15) 0%, transparent 70%);
         opacity: 0;
         transition: opacity 0.4s ease;
         pointer-events: none;
@@ -140,7 +140,7 @@
         right: 0;
         bottom: 0;
         border-radius: inherit;
-        border: 2px solid var(--brand-teal);
+        border: 2px solid var(--brand-primary);
         animation: soap-bubble 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
         z-index: -1;
       }
@@ -157,11 +157,16 @@
           extend: {
             colors: {
               brand: {
-                50: '#f0fdfa',
-                100: '#ccfbf1',
-                500: '#14b8a6',
-                600: '#0d9488',
-                700: '#0f766e',
+                50: '#e6eeff',
+                100: '#ccddff',
+                200: '#99bbff',
+                300: '#6699ff',
+                400: '#3377ff',
+                500: '#0057ff',
+                600: '#0046cc',
+                700: '#003499',
+                800: '#002366',
+                900: '#001133',
               }
             },
             animation: {

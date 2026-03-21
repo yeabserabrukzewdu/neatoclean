@@ -8,6 +8,7 @@ import Hero from './components/Hero';
 import BookingSection from './components/BookingSection';
 import HowItWorks from './components/HowItWorks';
 import WhyChooseUs from './components/WhyChooseUs';
+import AboutUs from './components/AboutUs';
 import Services from './components/Services';
 import Testimonials from './components/Testimonials';
 import Footer from './components/Footer';
@@ -134,7 +135,7 @@ const App: React.FC = () => {
         <AuthContext.Provider value={authContextValue}>
           <BookingContext.Provider value={bookingContextValue}>
             <div className="bg-slate-50 text-slate-800 min-h-screen dark:bg-slate-950 dark:text-slate-200 transition-colors duration-300">
-              <Header onLoginClick={() => setLoginModalOpen(true)} />
+              <Header />
               
               {page === 'home' && (
                 <>
@@ -143,6 +144,7 @@ const App: React.FC = () => {
                     <BookingSection />
                     <HowItWorks />
                     <WhyChooseUs />
+                    <AboutUs />
                     <Services />
                     <Testimonials />
                   </main>

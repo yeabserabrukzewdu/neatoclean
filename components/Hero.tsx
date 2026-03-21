@@ -43,7 +43,7 @@ const Hero: React.FC = () => {
       id="home"
       ref={heroRef}
       onMouseMove={handleMouseMove}
-      className="relative min-h-[750px] lg:h-[85vh] w-full overflow-hidden text-white flex items-center justify-center pt-24 pb-32"
+      className="relative min-h-[900px] sm:min-h-screen lg:h-screen w-full overflow-hidden text-white flex items-center justify-center pt-40 pb-48 lg:pt-32 lg:pb-40"
     >
       {/* Background Slideshow */}
       <div
@@ -87,13 +87,13 @@ const Hero: React.FC = () => {
 
       {/* Hero Content */}
       <div className="relative z-10 container mx-auto px-6 text-center">
-        <div className="max-w-5xl mx-auto space-y-10">
-          <div className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-md border border-white/20 px-4 py-2 rounded-full text-xs sm:text-sm font-bold animate-fade-in shadow-xl">
+        <div className="max-w-5xl mx-auto space-y-6 sm:space-y-10 mt-16 lg:mt-24">
+          <div className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-md border border-white/20 px-4 py-2 rounded-full text-[10px] sm:text-sm font-bold animate-fade-in shadow-xl">
              <span className="flex h-2 w-2 rounded-full bg-brand-500 animate-pulse"></span>
              <span className="uppercase tracking-widest">{isRtl ? 'تنظيف متميز معتمد' : 'Licensed Premium Cleaning'}</span>
           </div>
           
-          <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[1] [text-wrap:balance]">
+          <h1 className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[1.1] sm:leading-[1] [text-wrap:balance]">
              {heroWords.map((word, i) => {
                 const isHighlighted = word === 'Dubai’s' || word === 'Premium' || word === 'تميز' || word === 'دبي';
                 return (
@@ -109,17 +109,17 @@ const Hero: React.FC = () => {
           </h1>
           
           <p 
-            className="text-lg sm:text-xl md:text-2xl text-slate-100/90 max-w-2xl mx-auto leading-relaxed font-medium reveal-text [text-wrap:balance]" 
+            className="text-base sm:text-xl md:text-2xl text-slate-100/90 max-w-2xl mx-auto leading-relaxed font-medium reveal-text [text-wrap:balance]" 
             style={{ animationDelay: '800ms' }}
           >
             {t.heroSubtitle}
           </p>
           
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-5 pt-8 reveal-text" style={{ animationDelay: '1000ms' }}>
-            <a href="#booking" className="w-full sm:w-auto animate-soap-bubble bg-brand-500 hover:bg-brand-600 text-white px-10 py-5 rounded-2xl font-bold text-lg transition-all shadow-2xl shadow-brand-500/40 text-center ring-4 ring-brand-500/20 active:scale-95">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-5 pt-4 sm:pt-8 reveal-text" style={{ animationDelay: '1000ms' }}>
+            <a href="#booking" className="w-full sm:w-auto animate-soap-bubble bg-brand-500 hover:bg-brand-600 text-white px-8 sm:px-10 py-4 sm:py-5 rounded-2xl font-bold text-base sm:text-lg transition-all shadow-2xl shadow-brand-500/40 text-center ring-4 ring-brand-500/20 active:scale-95">
               {t.heroCta}
             </a>
-            <a href="#services" className="w-full sm:w-auto bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/30 text-white px-10 py-5 rounded-2xl font-bold text-lg transition-all text-center group">
+            <a href="#services" className="w-full sm:w-auto bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/30 text-white px-8 sm:px-10 py-4 sm:py-5 rounded-2xl font-bold text-base sm:text-lg transition-all text-center group">
               {t.navServices}
               <span className="inline-block transition-transform group-hover:translate-x-1 ms-2">→</span>
             </a>

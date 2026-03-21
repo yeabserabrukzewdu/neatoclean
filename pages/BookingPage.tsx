@@ -280,7 +280,7 @@ const BookingPage: React.FC = () => {
   }
 
   const getTranslatedText = (key: string) => SERVICE_TRANSLATIONS[key]?.[language] || '';
-  const serviceName = getTranslatedText(bookingDetails.service === 'turnover' ? 'turnover_name' : 'deep_clean_name');
+  const serviceName = getTranslatedText(`${bookingDetails.service}_name`);
   const roomCharge = (Math.max(0, bedrooms - 1) + Math.max(0, bathrooms - 1) + Math.max(0, kitchens - 1) + Math.max(0, otherRooms - 1)) * 10;
   const basePrice = hours * professionals * HOURLY_RATE_AED;
   const extrasPrice = selectedExtras.reduce((sum, service) => sum + service.price, 0);

@@ -56,6 +56,16 @@ export interface TranslationContent {
     location: string;
   }[];
 
+  // About Us
+  aboutUsTitle: string;
+  aboutUsText: string;
+  aboutUsStats: {
+    label: string;
+    value: string;
+  }[];
+  aboutUsServicesTitle: string;
+  aboutUsServices: string[];
+
   // Footer
   footerServices: string;
   footerCompany: string;
@@ -160,7 +170,7 @@ export type Translations = {
 };
 
 export interface ServicePackage {
-  id: 'turnover' | 'deep_clean' | 'essentials';
+  id: string;
   nameKey: string;
   priceKey: string;
   pricePeriodKey: string;
@@ -176,7 +186,7 @@ export interface ServicePackageTranslations {
 }
 
 export interface BookingDetails {
-  service: 'turnover' | 'deep_clean';
+  service: string;
   bedrooms: number;
   bathrooms: number;
   price: number;

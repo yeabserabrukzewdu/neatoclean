@@ -31,7 +31,7 @@ const Footer: React.FC = () => {
               </span>
             </button>
             <p className="text-slate-400 font-medium leading-relaxed max-w-sm">
-              The United Arab Emirates' leading tech-enabled turnover solution. We bridge the gap between hospitality and professional property management.
+              The United Arab Emirates' leading tech-enabled cleaning solution. We bridge the gap between hospitality and professional property management.
             </p>
             <div className="flex items-center gap-4 pt-2">
               <div className="flex -space-x-3 rtl:space-x-reverse">
@@ -53,7 +53,7 @@ const Footer: React.FC = () => {
             <div>
               <h3 className="text-[10px] font-black uppercase tracking-[0.25em] text-brand-500 mb-8">{t.footerServices}</h3>
               <ul className="space-y-4">
-                {['Executive Turnover', 'Elite Deep Clean', 'Essentials Restock', 'Ironing Service'].map(link => (
+                {['Residential Cleaning', 'Airbnb Cleaning', 'Elite Deep Clean', 'Office Cleaning'].map(link => (
                   <li key={link}>
                     <a href="#services" className="text-sm font-bold text-slate-400 hover:text-white transition-colors">{link}</a>
                   </li>

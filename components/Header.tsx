@@ -5,11 +5,9 @@ import { LANGUAGES } from '../constants';
 import { BubblesIcon, ChevronDownIcon, SunIcon, MoonIcon, UserIcon, MenuIcon, XIcon } from './icons';
 import { supabase } from '../supabaseClient';
 
-interface HeaderProps {
-  onLoginClick: () => void;
-}
+interface HeaderProps {}
 
-const Header: React.FC<HeaderProps> = ({ onLoginClick }) => {
+const Header: React.FC<HeaderProps> = () => {
   const { language, setLanguage, t } = useLanguage();
   const { theme, toggleTheme } = useTheme();
   const { session } = useAuth();
@@ -76,12 +74,15 @@ const Header: React.FC<HeaderProps> = ({ onLoginClick }) => {
       >
         <div className="container mx-auto px-6 flex justify-between items-center">
           <button onClick={() => setPage('home')} className="flex items-center space-x-2 rtl:space-x-reverse group">
-            <div className="bg-brand-500 p-1.5 rounded-xl group-hover:rotate-12 transition-transform duration-300 shadow-brand-500/30 shadow-lg logo-bubble">
-              <BubblesIcon className="h-6 w-6 text-white" />
-            </div>
-            <span className={`text-xl font-black tracking-tighter transition-colors ${!isTransparentState ? 'text-slate-900 dark:text-white' : 'text-white'}`}>
-              NeatoCleaning<span className="text-brand-500">.</span>
-            </span>
+            
+              <img 
+                 src="/logo.png"  // Update this path to match your file location
+                 alt="My Logo"
+                 width="170"
+                 height="58"
+                 style={{ objectFit: 'contain' }}  // Ensures it scales nicely without distortion
+               />
+            
           </button>
 
           <div className="flex items-center space-x-2 md:space-x-6 rtl:space-x-reverse">
@@ -89,7 +90,8 @@ const Header: React.FC<HeaderProps> = ({ onLoginClick }) => {
               {[
                 { label: t.navHome, id: 'home' },
                 { label: t.navServices, id: 'services' },
-                { label: t.navWhyUs, id: 'why-us' }
+                { label: t.navWhyUs, id: 'why-us' },
+                { label: t.footerAbout, id: 'about' }
               ].map((item) => (
                 <a 
                   key={item.id}
@@ -148,7 +150,10 @@ const Header: React.FC<HeaderProps> = ({ onLoginClick }) => {
                       <span className="hidden md:inline">{t.navLogout}</span>
                   </button>
                 ) : (
-                  <button onClick={onLoginClick} className="bg-brand-500 text-white hover:bg-brand-600 px-7 py-2.5 rounded-full text-sm font-black transition-all shadow-lg shadow-brand-500/25 active:scale-95">
+                  <button 
+                    onClick={(e) => handleLinkClick(e, 'booking')} 
+                    className="bg-brand-500 text-white hover:bg-brand-600 px-7 py-2.5 rounded-full text-sm font-black transition-all shadow-lg shadow-brand-500/25 active:scale-95"
+                  >
                     {t.navLogin}
                   </button>
                 )}
@@ -201,7 +206,8 @@ const Header: React.FC<HeaderProps> = ({ onLoginClick }) => {
               {[
                 { label: t.navHome, id: 'home' },
                 { label: t.navServices, id: 'services' },
-                { label: t.navWhyUs, id: 'why-us' }
+                { label: t.navWhyUs, id: 'why-us' },
+                { label: t.footerAbout, id: 'about' }
               ].map((item) => (
                 <a 
                   key={item.id}
@@ -242,7 +248,10 @@ const Header: React.FC<HeaderProps> = ({ onLoginClick }) => {
                   {t.navLogout}
                 </button>
               ) : (
-                <button onClick={() => { setIsMenuOpen(false); onLoginClick(); }} className="w-full bg-brand-500 hover:bg-brand-600 text-white p-5 rounded-[2rem] font-black text-lg shadow-xl shadow-brand-500/20 active:scale-95 transition-all">
+                <button 
+                  onClick={(e) => { setIsMenuOpen(false); handleLinkClick(e, 'booking'); }} 
+                  className="w-full bg-brand-500 hover:bg-brand-600 text-white p-5 rounded-[2rem] font-black text-lg shadow-xl shadow-brand-500/20 active:scale-95 transition-all"
+                >
                   {t.navLogin}
                 </button>
               )}

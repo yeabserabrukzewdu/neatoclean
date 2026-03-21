@@ -28,7 +28,7 @@ const Counter: React.FC<{ label: string; value: number; onIncrease: () => void; 
 const BookingSection: React.FC = () => {
     const { t, language } = useLanguage();
     const { startBooking } = useBooking();
-    const [service, setService] = useState<BookingDetails['service']>('turnover');
+    const [service, setService] = useState<string>('airbnb');
     const [bedrooms, setBedrooms] = useState(1);
     const [bathrooms, setBathrooms] = useState(1);
     const [price, setPrice] = useState(0);
@@ -40,9 +40,23 @@ const BookingSection: React.FC = () => {
 
     useEffect(() => {
         const calculatePrice = () => {
-            const basePrices = { turnover: 150, deep_clean: 300 };
-            const perRoomPrices = { turnover: 50, deep_clean: 75 };
-            const calculatedPrice = basePrices[service] + (bedrooms * perRoomPrices[service]) + (bathrooms * perRoomPrices[service]);
+            const basePrices: Record<string, number> = { 
+                residential: 150, 
+                airbnb: 250, 
+                deep_clean: 450, 
+                move_in_out: 500, 
+                office: 300, 
+                same_day: 350 
+            };
+            const perRoomPrices: Record<string, number> = { 
+                residential: 40, 
+                airbnb: 50, 
+                deep_clean: 75, 
+                move_in_out: 80, 
+                office: 60, 
+                same_day: 70 
+            };
+            const calculatedPrice = (basePrices[service] || 250) + (bedrooms * (perRoomPrices[service] || 50)) + (bathrooms * (perRoomPrices[service] || 50));
             setPrice(calculatedPrice);
         };
         calculatePrice();
@@ -73,22 +87,25 @@ const BookingSection: React.FC = () => {
                     className="scroll-reveal max-w-6xl mx-auto bg-white dark:bg-slate-800 rounded-[32px] sm:rounded-[40px] shadow-[0_40px_80px_-20px_rgba(0,0,0,0.15)] dark:shadow-2xl border border-slate-100 dark:border-slate-700 p-6 sm:p-8 md:p-12 transition-all"
                 >
                     <div className="grid grid-cols-1 lg:grid-cols-12 items-center gap-8 lg:gap-10">
-                        {/* Service Toggle */}
+                        {/* Service Selection */}
                         <div className="lg:col-span-3">
                             <label className="block text-[10px] font-black uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-3">{t.serviceType}</label>
-                            <div className="p-1.5 bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-[20px] flex gap-1">
-                                <button
-                                    onClick={() => setService('turnover')}
-                                    className={`flex-1 py-3 px-1 text-[10px] sm:text-xs font-black rounded-[14px] transition-all uppercase tracking-tighter ${service === 'turnover' ? 'bg-white dark:bg-slate-800 shadow-md text-brand-500 scale-105' : 'text-slate-500 hover:text-slate-700 dark:hover:text-slate-300'}`}
+                            <div className="relative group">
+                                <select
+                                    value={service}
+                                    onChange={(e) => setService(e.target.value)}
+                                    className="w-full py-4 px-5 bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-[20px] text-sm font-black uppercase tracking-tight text-slate-700 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500 appearance-none cursor-pointer transition-all"
                                 >
-                                    {(getTranslatedText('turnover_name') || 'Turnover').split(' ')[0]}
-                                </button>
-                                <button
-                                    onClick={() => setService('deep_clean')}
-                                    className={`flex-1 py-3 px-1 text-[10px] sm:text-xs font-black rounded-[14px] transition-all uppercase tracking-tighter ${service === 'deep_clean' ? 'bg-white dark:bg-slate-800 shadow-md text-brand-500 scale-105' : 'text-slate-500 hover:text-slate-700 dark:hover:text-slate-300'}`}
-                                >
-                                    {(getTranslatedText('deep_clean_name') || 'Deep').split(' ')[0]}
-                                </button>
+                                    <option value="residential">{getTranslatedText('residential_name')}</option>
+                                    <option value="airbnb">{getTranslatedText('airbnb_name')}</option>
+                                    <option value="deep_clean">{getTranslatedText('deep_clean_name')}</option>
+                                    <option value="move_in_out">{getTranslatedText('move_in_out_name')}</option>
+                                    <option value="office">{getTranslatedText('office_name')}</option>
+                                    <option value="same_day">{getTranslatedText('same_day_name')}</option>
+                                </select>
+                                <div className="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">
+                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M19 9l-7 7-7-7"></path></svg>
+                                </div>
                             </div>
                         </div>
 
