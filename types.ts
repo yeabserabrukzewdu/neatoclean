@@ -214,8 +214,6 @@ export interface ServiceRequest {
 }
 
 export interface DashboardMetrics {
-  totalRevenue: number;
   activeBookings: number;
-  avgOrderValue: number;
   cleanersOnline: number;
 }

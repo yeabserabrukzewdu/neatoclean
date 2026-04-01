@@ -1,7 +1,6 @@
 import { Language, Translations, ServicePackage, ServicePackageTranslations, AdditionalService } from './types';
 
 export const WHATSAPP_NUMBER = "971501234567";
-export const HOURLY_RATE_AED = 50;
 
 export const LANGUAGES = {
   [Language.EN]: { nativeName: 'English', flag: '🇬🇧' },
@@ -33,11 +32,11 @@ const enBase = {
   ],
   servicesTitle: 'Specialized Services',
   servicesSubtitle: 'Precision-engineered solutions for the discerning property owner.',
-  getQuote: 'Request Quote',
+  getQuote: 'Request a Price',
   footerText: `© ${new Date().getFullYear()} NeatoCleaning UAE. Licensed by DTCM. All rights reserved.`,
   whatsappMessage: 'Greetings. I am interested in exploring your professional cleaning services for my property.',
   whatsappTooltip: 'Need an instant quote? Chat with our concierge.',
-  bookingTitle: 'Instant Service Estimate',
+  bookingTitle: 'Instant Service Inquiry',
   serviceType: 'Cleaning Tier',
   bedrooms: 'Bedrooms',
   bathrooms: 'Bathrooms',
@@ -45,8 +44,8 @@ const enBase = {
   otherRooms: 'Lounge/Other',
   propertyDetails: 'Property Specifications',
   propertyRequirementsDesc: 'Define your property requirements for precise allocation.',
-  estimatedPrice: 'Estimated Investment',
-  bookNow: 'Proceed to Booking',
+  estimatedPrice: 'Price Inquiry',
+  bookNow: 'Request a Price',
   howItWorksTitle: 'Our Streamlined Process',
   howItWorksSteps: [
       { title: 'Selection', description: 'Define your requirements and receive an immediate, transparent cost projection.' },
@@ -144,12 +143,12 @@ const enBase = {
   zipCode: 'Postal Code',
   zipCodePlaceholder: '00000',
   reviewYourBooking: 'Inquiry Submitted',
-  totalPrice: 'Investment Total',
+  totalPrice: 'Inquiry Status',
   cleaningDate: 'Date',
   cleaningTime: 'Time',
   extras: 'Selected Extras',
   noExtras: 'Standard Tier Only',
-  hourlyRate: 'Standard Rate',
+  hourlyRate: 'Service Level',
   additionalRoomsSurcharge: 'Scale Adjustment',
 };
 
@@ -171,11 +170,11 @@ const arBase = {
   ],
   servicesTitle: 'خدمات متخصصة',
   servicesSubtitle: 'حلول هندسية دقيقة لأصحاب العقارات المتميزين.',
-  getQuote: 'طلب عرض سعر',
+  getQuote: 'طلب السعر',
   footerText: `© ${new Date().getFullYear()} نيتو كلينينج الإمارات. مرخص من دائرة السياحة. جميع الحقوق محفوظة.`,
   whatsappMessage: 'تحية طيبة. أنا مهتم باستكشاف خدمات التنظيف الاحترافية لعقاري.',
   whatsappTooltip: 'هل تحتاج إلى عرض سعر؟ تحدث مع الكونسيرج الخاص بنا.',
-  bookingTitle: 'تقدير فوري للخدمة',
+  bookingTitle: 'استفسار فوري عن الخدمة',
   serviceType: 'مستوى التنظيف',
   bedrooms: 'غرف النوم',
   bathrooms: 'الحمامات',
@@ -183,8 +182,8 @@ const arBase = {
   otherRooms: 'صالة / أخرى',
   propertyDetails: 'مواصفات العقار',
   propertyRequirementsDesc: 'حدد متطلبات عقارك للتخصيص الدقيق.',
-  estimatedPrice: 'الاستثمار التقديري',
-  bookNow: 'المتابعة للحجز',
+  estimatedPrice: 'طلب السعر',
+  bookNow: 'طلب السعر',
   howItWorksTitle: 'عمليتنا المبسطة',
   howItWorksSteps: [
       { title: 'الاختيار', description: 'حدد متطلباتك واحصل على تقدير فوري وشفاف للتكلفة.' },
@@ -282,12 +281,12 @@ const arBase = {
   zipCode: 'الرمز البريدي',
   zipCodePlaceholder: '00000',
   reviewYourBooking: 'تم إرسال الطلب',
-  totalPrice: 'إجمالي الاستثمار',
+  totalPrice: 'حالة الطلب',
   cleaningDate: 'التاريخ',
   cleaningTime: 'الوقت',
   extras: 'الإضافات المختارة',
   noExtras: 'المستوى القياسي فقط',
-  hourlyRate: 'السعر القياسي',
+  hourlyRate: 'مستوى الخدمة',
   additionalRoomsSurcharge: 'تعديل الحجم',
 };
 
@@ -374,48 +373,48 @@ export const SERVICE_PACKAGES: ServicePackage[] = [
 
 export const SERVICE_TRANSLATIONS: ServicePackageTranslations = {
     residential_name: { en: 'Residential Cleaning', ar: 'تنظيف سكني' },
-    residential_price: { en: 'AED 150', ar: '150 د.إ' },
-    residential_period: { en: '/ visit', ar: '/ زيارة' },
+    residential_price: { en: 'Price on Request', ar: 'السعر عند الطلب' },
+    residential_period: { en: '', ar: '' },
     residential_desc: { en: 'Standard home cleaning for daily comfort and hygiene.', ar: 'تنظيف منزلي قياسي للراحة والنظافة اليومية.' },
     residential_feat1: { en: 'Dusting & vacuuming', ar: 'إزالة الغبار والكنس' },
     residential_feat2: { en: 'Kitchen & bathroom sanitization', ar: 'تعقيم المطبخ والحمام' },
     residential_feat3: { en: 'Floor mopping', ar: 'مسح الأرضيات' },
     
     airbnb_name: { en: 'Airbnb & Holiday Home', ar: 'تنظيف إير بي إن بي وبيوت العطلات' },
-    airbnb_price: { en: 'AED 250', ar: '250 د.إ' },
-    airbnb_period: { en: '/ turnover', ar: '/ تبديل' },
+    airbnb_price: { en: 'Price on Request', ar: 'السعر عند الطلب' },
+    airbnb_period: { en: '', ar: '' },
     airbnb_desc: { en: 'Professional turnover services for short-term rentals.', ar: 'خدمات تبديل احترافية للإيجارات قصيرة الأمد.' },
     airbnb_feat1: { en: 'Hotel-standard sanitation', ar: 'تعقيم بمعايير الفنادق' },
     airbnb_feat2: { en: 'Amenity replenishment', ar: 'تجديد المستلزمات' },
     airbnb_feat3: { en: 'Linen & towel setup', ar: 'تجهيز البياضات والمناشف' },
     
     deep_clean_name: { en: 'Deep Cleaning', ar: 'تنظيف عميق' },
-    deep_clean_price: { en: 'AED 450', ar: '450 د.إ' },
-    deep_clean_period: { en: '/ session', ar: '/ جلسة' },
+    deep_clean_price: { en: 'Price on Request', ar: 'السعر عند الطلب' },
+    deep_clean_period: { en: '', ar: '' },
     deep_clean_desc: { en: 'Thorough sanitization for a pristine environment.', ar: 'تعقيم شامل لبيئة نظيفة تماماً.' },
     deep_clean_feat1: { en: 'Detailed surface restoration', ar: 'ترميم الأسطح المفصل' },
     deep_clean_feat2: { en: 'Appliance deep sanitization', ar: 'تعقيم عميق للأجهزة' },
     deep_clean_feat3: { en: 'Grout & tile refresh', ar: 'تجديد الجص والبلاط' },
     
     move_in_out_name: { en: 'Move-in / Move-out', ar: 'تنظيف الانتقال (دخول/خروج)' },
-    move_in_out_price: { en: 'AED 500', ar: '500 د.إ' },
-    move_in_out_period: { en: '/ service', ar: '/ خدمة' },
+    move_in_out_price: { en: 'Price on Request', ar: 'السعر عند الطلب' },
+    move_in_out_period: { en: '', ar: '' },
     move_in_out_desc: { en: 'Detailed cleaning for property transitions.', ar: 'تنظيف مفصل لانتقالات العقارات.' },
     move_in_out_feat1: { en: 'Inside cabinet cleaning', ar: 'تنظيف الخزائن من الداخل' },
     move_in_out_feat2: { en: 'Window & track detailing', ar: 'تفصيل النوافذ والمسارات' },
     move_in_out_feat3: { en: 'Full property disinfection', ar: 'تطهير كامل للعقار' },
     
     office_name: { en: 'Office Cleaning', ar: 'تنظيف المكاتب' },
-    office_price: { en: 'AED 300', ar: '300 د.إ' },
-    office_period: { en: '/ visit', ar: '/ زيارة' },
+    office_price: { en: 'Price on Request', ar: 'السعر عند الطلب' },
+    office_period: { en: '', ar: '' },
     office_desc: { en: 'Professional workspace maintenance for productivity.', ar: 'صيانة احترافية لمساحة العمل من أجل الإنتاجية.' },
     office_feat1: { en: 'Desk & equipment sanitization', ar: 'تعقيم المكاتب والمعدات' },
     office_feat2: { en: 'Common area maintenance', ar: 'صيانة المناطق المشتركة' },
     office_feat3: { en: 'Waste management', ar: 'إدارة النفايات' },
     
     same_day_name: { en: 'Same-day Service', ar: 'خدمة في نفس اليوم' },
-    same_day_price: { en: 'AED 350', ar: '350 د.إ' },
-    same_day_period: { en: '/ request', ar: '/ طلب' },
+    same_day_price: { en: 'Price on Request', ar: 'السعر عند الطلب' },
+    same_day_period: { en: '', ar: '' },
     same_day_desc: { en: 'Urgent cleaning solutions when you need them most.', ar: 'حلول تنظيف عاجلة عندما تكون في أمس الحاجة إليها.' },
     same_day_feat1: { en: 'Priority scheduling', ar: 'جدولة ذات أولوية' },
     same_day_feat2: { en: 'Rapid response team', ar: 'فريق استجابة سريع' },
@@ -423,9 +422,9 @@ export const SERVICE_TRANSLATIONS: ServicePackageTranslations = {
 };
 
 export const ADDITIONAL_SERVICES: AdditionalService[] = [
-    { id: 'ironing', nameKey: 'ironing_name', descriptionKey: 'ironing_desc', price: 50, image: 'https://images.unsplash.com/photo-1595505290943-315147829824?q=80&w=800' },
-    { id: 'balcony_cleaning', nameKey: 'balcony_cleaning_name', descriptionKey: 'balcony_cleaning_desc', price: 40, image: 'https://images.unsplash.com/photo-1621283262227-28f0f23a6b8f?q=80&w=800' },
-    { id: 'fridge_cleaning', nameKey: 'fridge_cleaning_name', descriptionKey: 'fridge_cleaning_desc', price: 30, image: 'https://images.unsplash.com/photo-1617454238218-473f4a3d7a8c?q=80&w=800' },
-    { id: 'wardrobe_cleaning', nameKey: 'wardrobe_cleaning_name', descriptionKey: 'wardrobe_cleaning_desc', price: 45, image: 'https://images.unsplash.com/photo-1558959298-a352b2f0c33a?q=80&w=800' },
-    { id: 'after_party_cleaning', nameKey: 'after_party_cleaning_name', descriptionKey: 'after_party_cleaning_desc', price: 100, image: 'https://images.unsplash.com/photo-1543818399-ff3c177a4353?q=80&w=800' },
+    { id: 'ironing', nameKey: 'ironing_name', descriptionKey: 'ironing_desc', price: 0, image: 'https://images.unsplash.com/photo-1595505290943-315147829824?q=80&w=800' },
+    { id: 'balcony_cleaning', nameKey: 'balcony_cleaning_name', descriptionKey: 'balcony_cleaning_desc', price: 0, image: 'https://images.unsplash.com/photo-1621283262227-28f0f23a6b8f?q=80&w=800' },
+    { id: 'fridge_cleaning', nameKey: 'fridge_cleaning_name', descriptionKey: 'fridge_cleaning_desc', price: 0, image: 'https://images.unsplash.com/photo-1617454238218-473f4a3d7a8c?q=80&w=800' },
+    { id: 'wardrobe_cleaning', nameKey: 'wardrobe_cleaning_name', descriptionKey: 'wardrobe_cleaning_desc', price: 0, image: 'https://images.unsplash.com/photo-1558959298-a352b2f0c33a?q=80&w=800' },
+    { id: 'after_party_cleaning', nameKey: 'after_party_cleaning_name', descriptionKey: 'after_party_cleaning_desc', price: 0, image: 'https://images.unsplash.com/photo-1543818399-ff3c177a4353?q=80&w=800' },
 ];
