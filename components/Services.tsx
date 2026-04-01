@@ -48,14 +48,7 @@ const ServiceCard: React.FC<{ pkg: any; t: any; language: any }> = ({ pkg, t, la
         </p>
 
         <div className="mb-10">
-          <div className="flex items-baseline gap-2">
-            <span className="text-5xl font-black text-slate-900 dark:text-white tracking-tighter transition-transform group-hover:scale-110 origin-left duration-300">
-              {getTranslatedText(pkg.priceKey).replace(/[^\d]/g, '')}
-            </span>
-            <span className="text-sm font-black text-slate-400 uppercase tracking-widest">
-              AED {getTranslatedText(pkg.pricePeriodKey)}
-            </span>
-          </div>
+          {/* Price removed as per request */}
         </div>
 
         <div className="space-y-4 mb-10 flex-grow">

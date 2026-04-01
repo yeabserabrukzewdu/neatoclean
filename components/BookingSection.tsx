@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useLanguage, useBooking } from '../App';
-import { SERVICE_TRANSLATIONS } from '../constants';
+import { SERVICE_TRANSLATIONS, WHATSAPP_NUMBER } from '../constants';
 import { BookingDetails } from '../types';
 
 const Counter: React.FC<{ label: string; value: number; onIncrease: () => void; onDecrease: () => void; }> = ({ label, value, onIncrease, onDecrease }) => (
@@ -25,42 +25,17 @@ const Counter: React.FC<{ label: string; value: number; onIncrease: () => void; 
 );
 
 
-const BookingSection: React.FC = () => {
+    const BookingSection: React.FC = () => {
     const { t, language } = useLanguage();
     const { startBooking } = useBooking();
     const [service, setService] = useState<string>('airbnb');
     const [bedrooms, setBedrooms] = useState(1);
     const [bathrooms, setBathrooms] = useState(1);
-    const [price, setPrice] = useState(0);
     const containerRef = useRef<HTMLDivElement>(null);
 
     const getTranslatedText = (key: string) => {
         return SERVICE_TRANSLATIONS[key]?.[language] || '';
     };
-
-    useEffect(() => {
-        const calculatePrice = () => {
-            const basePrices: Record<string, number> = { 
-                residential: 150, 
-                airbnb: 250, 
-                deep_clean: 450, 
-                move_in_out: 500, 
-                office: 300, 
-                same_day: 350 
-            };
-            const perRoomPrices: Record<string, number> = { 
-                residential: 40, 
-                airbnb: 50, 
-                deep_clean: 75, 
-                move_in_out: 80, 
-                office: 60, 
-                same_day: 70 
-            };
-            const calculatedPrice = (basePrices[service] || 250) + (bedrooms * (perRoomPrices[service] || 50)) + (bathrooms * (perRoomPrices[service] || 50));
-            setPrice(calculatedPrice);
-        };
-        calculatePrice();
-    }, [service, bedrooms, bathrooms]);
 
     useEffect(() => {
       const observer = new IntersectionObserver((entries) => {
@@ -76,7 +51,7 @@ const BookingSection: React.FC = () => {
     }, []);
     
     const handleBookNow = () => {
-        startBooking({ service, bedrooms, bathrooms, price });
+        startBooking({ service, bedrooms, bathrooms, price: 0 });
     };
 
     return (
@@ -120,17 +95,18 @@ const BookingSection: React.FC = () => {
                             <div className="text-center xs:text-left rtl:xs:text-right w-full xs:w-auto transition-all">
                                 <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-1">{t.estimatedPrice}</p>
                                 <div className="flex items-baseline justify-center xs:justify-start gap-1">
-                                    <span className="text-4xl sm:text-5xl font-black text-slate-900 dark:text-white leading-none tracking-tighter">{price}</span>
-                                    <span className="text-xs sm:text-sm font-black text-slate-400 uppercase">AED</span>
+                                    <span className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white leading-none tracking-tighter uppercase">{getTranslatedText(`${service}_name`)}</span>
                                 </div>
                             </div>
-                            <button
-                                onClick={handleBookNow}
-                                className="group relative w-full xs:w-auto overflow-hidden bg-brand-500 hover:bg-brand-600 text-white font-black py-5 sm:py-6 px-8 sm:px-10 rounded-2xl sm:rounded-[2rem] shadow-xl sm:shadow-2xl shadow-brand-500/30 transition-all hover:-translate-y-1 active:scale-95 whitespace-nowrap text-base sm:text-lg"
+                            <a
+                                href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`Greetings. I would like to request a price for ${getTranslatedText(`${service}_name`)} with ${bedrooms} bedrooms and ${bathrooms} bathrooms.`)}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="group relative w-full xs:w-auto overflow-hidden bg-brand-500 hover:bg-brand-600 text-white font-black py-5 sm:py-6 px-8 sm:px-10 rounded-2xl sm:rounded-[2rem] shadow-xl sm:shadow-2xl shadow-brand-500/30 transition-all hover:-translate-y-1 active:scale-95 whitespace-nowrap text-base sm:text-lg text-center"
                             >
                                 <div className="absolute inset-0 bg-gradient-to-tr from-white/20 to-transparent translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out"></div>
                                 <span className="relative z-10">{t.bookNow}</span>
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </div>
