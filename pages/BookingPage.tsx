@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useLanguage, useBooking, useAuth } from '../App';
-import { SERVICE_TRANSLATIONS, WHATSAPP_NUMBER, ADDITIONAL_SERVICES, HOURLY_RATE_AED } from '../constants';
+import { SERVICE_TRANSLATIONS, WHATSAPP_NUMBER, ADDITIONAL_SERVICES } from '../constants';
 import { ArrowLeftIcon, CheckIcon, CreditCardIcon, VisaIcon, MastercardIcon, AmexIcon, UserIcon, CalendarIcon, LockClosedIcon, ChevronDownIcon, LocationMarkerIcon, OfficeBuildingIcon, HashtagIcon, CrosshairsIcon, XIcon } from '../components/icons';
 import { AdditionalService, Language } from '../types';
 import { supabase } from '../supabaseClient';
@@ -97,7 +97,7 @@ const BookingSummary: React.FC<BookingSummaryProps> = (props) => {
 
           <div className="border-t dark:border-slate-700 pt-3 flex justify-between items-center">
               <span className="text-lg font-black">{t.totalPrice}:</span>
-              <span className="text-2xl font-black text-brand-500">{props.totalPrice} <span className="text-xs">AED</span></span>
+              <span className="text-2xl font-black text-brand-500">TBD</span>
           </div>
       </div>
     );
@@ -113,7 +113,7 @@ const BookingSummary: React.FC<BookingSummaryProps> = (props) => {
               <div className="flex justify-between items-center">
                   <div>
                     <p className="text-[10px] font-black uppercase text-slate-400 tracking-widest">{t.totalPrice}</p>
-                    <p className="text-2xl font-black text-brand-500">{props.totalPrice} <span className="text-sm">AED</span></p>
+                    <p className="text-2xl font-black text-brand-500">TBD</p>
                   </div>
                   <button onClick={() => setIsExpanded(true)} className="text-brand-500 font-bold text-sm uppercase tracking-tighter flex items-center gap-1">
                     {t.detailsLabel} <ChevronDownIcon className="h-4 w-4" />
@@ -281,10 +281,12 @@ const BookingPage: React.FC = () => {
 
   const getTranslatedText = (key: string) => SERVICE_TRANSLATIONS[key]?.[language] || '';
   const serviceName = getTranslatedText(`${bookingDetails.service}_name`);
-  const roomCharge = (Math.max(0, bedrooms - 1) + Math.max(0, bathrooms - 1) + Math.max(0, kitchens - 1) + Math.max(0, otherRooms - 1)) * 10;
-  const basePrice = hours * professionals * HOURLY_RATE_AED;
-  const extrasPrice = selectedExtras.reduce((sum, service) => sum + service.price, 0);
-  const totalPrice = basePrice + extrasPrice + roomCharge;
+  
+  // Pricing logic removed as per request
+  const roomCharge = 0;
+  const basePrice = 0;
+  const extrasPrice = 0;
+  const totalPrice = 0;
 
   const handleConfirmBooking = async () => {
     const action = async () => {
@@ -296,7 +298,7 @@ const BookingPage: React.FC = () => {
                 property: `${bedrooms}BR / ${bathrooms}BA`,
                 date: date,
                 time: time,
-                total: totalPrice,
+                total: 0,
                 status: 'pending',
                 address: address,
                 notes: instructions,
@@ -305,7 +307,7 @@ const BookingPage: React.FC = () => {
 
             if (error) throw error;
 
-            const message = `NeatoCleaning Inquiry Sent:\nService: ${serviceName}\nProperty: ${bedrooms}BR/${bathrooms}BA\nDate: ${date} @ ${time}\nAddress: ${address}\nTotal: ${totalPrice} AED`;
+            const message = `NeatoCleaning Inquiry Sent:\nService: ${serviceName}\nProperty: ${bedrooms}BR/${bathrooms}BA\nDate: ${date} @ ${time}\nAddress: ${address}\nTotal: Price on Request`;
             window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, '_blank');
             
             setStep(5);
@@ -375,7 +377,7 @@ const BookingPage: React.FC = () => {
                                                 </div>
                                                 <div className="p-5">
                                                     <h3 className="font-bold mb-1">{name}</h3>
-                                                    <p className="text-xl font-black text-brand-500">{service.price} AED</p>
+                                                    <p className="text-xl font-black text-brand-500">Price on Request</p>
                                                 </div>
                                                 {isSelected && <div className="absolute top-4 right-4 rtl:left-4 rtl:right-auto bg-brand-500 text-white p-1.5 rounded-full shadow-lg animate-bounce"><CheckIcon className="w-4 h-4" /></div>}
                                             </button>

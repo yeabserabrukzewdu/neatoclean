@@ -1,21 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { useLanguage, useBooking } from '../App';
-import { HOURLY_RATE_AED, ADDITIONAL_SERVICES, SERVICE_TRANSLATIONS } from '../constants';
+import { ADDITIONAL_SERVICES, SERVICE_TRANSLATIONS } from '../constants';
 import { ServiceRequest, DashboardMetrics } from '../types';
-import { CheckIcon, SparkleIcon, UserIcon, ClockIcon, CalculatorIcon, ArrowLeftIcon } from '../components/icons';
+import { CheckIcon, SparkleIcon, UserIcon, ClockIcon, ArrowLeftIcon } from '../components/icons';
 import { supabase } from '../supabaseClient';
 
 const AdminPage: React.FC = () => {
   const { t, language } = useLanguage();
   const { setPage } = useBooking();
-  const [hourlyRate, setHourlyRate] = useState(HOURLY_RATE_AED);
   const [requests, setRequests] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState<'overview' | 'pricing' | 'requests'>('requests');
+  const [activeTab, setActiveTab] = useState<'overview' | 'requests'>('requests');
   const [metrics, setMetrics] = useState<DashboardMetrics>({
-      totalRevenue: 0,
       activeBookings: 0,
-      avgOrderValue: 0,
       cleanersOnline: 8
   });
 
@@ -34,12 +31,9 @@ const AdminPage: React.FC = () => {
       if (error) throw error;
       setRequests(data || []);
       
-      const totalRev = data?.reduce((acc: number, curr: any) => acc + (curr.total || 0), 0) || 0;
       const active = data?.filter((r: any) => r.status === 'pending' || r.status === 'confirmed').length || 0;
       setMetrics({
-          totalRevenue: totalRev,
           activeBookings: active,
-          avgOrderValue: data?.length ? Math.round(totalRev / data.length) : 0,
           cleanersOnline: 12
       });
     } catch (err) {
@@ -81,7 +75,7 @@ const AdminPage: React.FC = () => {
           </div>
           
           <div className="flex bg-white dark:bg-slate-900 p-1.5 rounded-[20px] shadow-sm border border-slate-100 dark:border-slate-800">
-            {(['overview', 'pricing', 'requests'] as const).map((tab) => (
+            {(['overview', 'requests'] as const).map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
@@ -96,11 +90,10 @@ const AdminPage: React.FC = () => {
         {/* Tab Content */}
         {activeTab === 'overview' && (
           <div className="space-y-10 animate-fade-in">
-             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {[
-                  { label: 'Projected Revenue', value: `${metrics.totalRevenue} AED`, icon: CalculatorIcon, color: 'text-brand-500' },
+                  { label: 'Total Inquiries', value: requests.length, icon: ClockIcon, color: 'text-brand-500' },
                   { label: 'Live Inquiries', value: metrics.activeBookings, icon: ClockIcon, color: 'text-amber-500' },
-                  { label: 'Avg. Lead Value', value: `${metrics.avgOrderValue} AED`, icon: SparkleIcon, color: 'text-indigo-500' },
                   { label: 'Staff Dispatch', value: metrics.cleanersOnline, icon: UserIcon, color: 'text-emerald-500' },
                 ].map((stat, i) => (
                   <div key={i} className="bg-white dark:bg-slate-900 p-8 rounded-[40px] shadow-sm border border-slate-100 dark:border-slate-800 group hover:shadow-xl transition-all">
@@ -111,30 +104,6 @@ const AdminPage: React.FC = () => {
                     <p className="text-3xl font-black text-slate-900 dark:text-white">{stat.value}</p>
                   </div>
                 ))}
-             </div>
-          </div>
-        )}
-
-        {activeTab === 'pricing' && (
-          <div className="space-y-10 animate-fade-in">
-             <div className="bg-white dark:bg-slate-900 rounded-[40px] p-10 border border-slate-100 dark:border-slate-800 shadow-sm">
-                <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
-                  <h2 className="text-2xl font-black uppercase tracking-tight">Standard Rate Architecture</h2>
-                  <div className="px-4 py-2 bg-brand-500/10 text-brand-500 rounded-full text-xs font-black">LIVE CALCULATOR SYNCED</div>
-                </div>
-                
-                <div className="max-w-md">
-                   <label className="block text-[10px] font-black uppercase tracking-widest text-slate-400 mb-3">Global Hourly Rate (AED)</label>
-                   <div className="flex items-center gap-4">
-                      <input 
-                        type="number" 
-                        value={hourlyRate} 
-                        onChange={(e) => setHourlyRate(parseInt(e.target.value))}
-                        className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl p-4 font-black text-xl text-brand-500 focus:outline-none focus:ring-4 focus:ring-brand-500/10 transition-all"
-                      />
-                      <button className="bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-8 py-4 rounded-2xl font-black text-sm uppercase transition-all active:scale-95 shadow-lg">Save</button>
-                   </div>
-                </div>
              </div>
           </div>
         )}
@@ -159,7 +128,7 @@ const AdminPage: React.FC = () => {
                     <th className="px-8 py-6">Client / Address</th>
                     <th className="px-8 py-6">Property</th>
                     <th className="px-8 py-6">Schedule</th>
-                    <th className="px-8 py-6">Est. Total</th>
+                    <th className="px-8 py-6">Inquiry Type</th>
                     <th className="px-8 py-6">Status</th>
                     <th className="px-8 py-6">Actions</th>
                   </tr>
@@ -180,7 +149,7 @@ const AdminPage: React.FC = () => {
                          <div className="text-xs font-black">{req.date}</div>
                          <div className="text-[10px] text-slate-400 font-bold uppercase">{req.time}</div>
                       </td>
-                      <td className="px-8 py-6 text-sm font-black text-slate-900 dark:text-white">{req.total} AED</td>
+                      <td className="px-8 py-6 text-sm font-black text-slate-900 dark:text-white">Price Inquiry</td>
                       <td className="px-8 py-6">
                         <span className={`inline-flex px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest ${
                           req.status === 'confirmed' ? 'bg-indigo-100 text-indigo-700' :
