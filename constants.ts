@@ -1,6 +1,6 @@
 import { Language, Translations, ServicePackage, ServicePackageTranslations, AdditionalService } from './types';
 
-export const WHATSAPP_NUMBER = "971501234567";
+export const WHATSAPP_NUMBER = "971544034087";
 
 export const LANGUAGES = {
   [Language.EN]: { nativeName: 'English', flag: '🇬🇧' },
